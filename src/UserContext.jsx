@@ -18,15 +18,14 @@ export const UserStorage = ({children}) => {
             setLoading(false)
             setLogin(false)
             window.localStorage.removeItem('token')
-            navigate('/login')
-        }, [navigate])
+        }, [])
 
     async function getUser(token){
         const {url, options} = USER_GET(token)
         const response = await fetch(url, options)
         const json = await response.json()
         setData(json)
-        setLoading(true)
+        setLogin(true)
     }
 
     async function userLogin(username, password){
@@ -35,7 +34,6 @@ export const UserStorage = ({children}) => {
             setLoading(true)
             const {url, options} = TOKEN_POST({username, password})
             const tokenRes = await fetch(url, options)
-            console.log(tokenRes)
             if(!tokenRes.ok) throw new Error ('Usuario invalido')
             const {token} = await tokenRes.json()
             window.localStorage.setItem('token', token)

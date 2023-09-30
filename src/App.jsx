@@ -12,7 +12,7 @@ import ProtectedRoute from './Components/Helper/ProtectedRoute';
 const App = () => {
   return (
     <div>
-      <BrowserRouter>
+      <BrowserRouter basename={window.location.pathname || ''}>
       <UserStorage>
         <Header/>
             <Routes>
