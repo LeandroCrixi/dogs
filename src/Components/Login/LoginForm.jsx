@@ -7,6 +7,7 @@ import useForm from '../../Hooks/useForm'
 import { UserContext } from '../../UserContext'
 import styles from './LoginForm.module.css'
 import stylesBtn from '../Forms/Button.module.css'
+import Head from '../Helper/Head'
 
 const LoginForm = () => {
   const username = useForm()
@@ -24,12 +25,13 @@ const LoginForm = () => {
 
   return (
     <section className='animeLeft'>
+      <Head title='Login'/>
       <h1 className='title'>Login</h1>
       <form className={styles.form} onSubmit={handleSubmit}>
         <Input label='Username' type='text' name='username' {...username}/>
         <Input label='Password' type='password' name='password' {...password}/>
         {loading ? <Button disabled>Loading...</Button> : <Button>Login</Button>}
-        <Error error={error}/>
+        <Error error={error && 'Incorrect username/password'}/>
         {error && <p>{error}</p>}
       </form>
       <Link className={styles.perdeu} to='/login/perdeu'>Forgot Password?</Link>
